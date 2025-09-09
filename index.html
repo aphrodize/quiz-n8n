@@ -18,6 +18,7 @@
         .loader { width: 48px; height: 48px; border: 5px solid #FFF; border-bottom-color: #4F46E5; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
         @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .option-btn { transition: all 0.2s ease-in-out; }
+        .option-btn:focus { outline: none; -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4 text-gray-800">
@@ -132,8 +133,7 @@
                     result.trainingDates.forEach(d => {
                         const option = document.createElement('option');
                         option.value = d.date;
-                        // option.textContent = d.display; // นี่คือบรรทัดเดิมที่แสดง "(ว่าง x คน)"
-                        option.textContent = d.display.split('(')[0].trim(); // ใช้บรรทัดนี้แทนเพื่อซ่อน
+                        option.textContent = d.display.split('(')[0].trim();
                         trainingDateSelect.appendChild(option);
                     });
                 } else {
@@ -250,7 +250,7 @@
             question.o.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.textContent = option;
-                button.className = 'option-btn w-full text-left p-4 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-100 focus:outline-none transition';
+                button.className = 'option-btn w-full text-left p-4 bg-white border-2 border-gray-200 rounded-xl focus:outline-none transition';
                 button.onclick = () => selectOption(button, index, question.a);
                 optionsContainer.appendChild(button);
             });
@@ -267,7 +267,7 @@
                 btn.disabled = true;
             });
 
-            selectedButton.classList.remove('bg-white', 'border-gray-200', 'hover:bg-gray-100');
+            selectedButton.classList.remove('bg-white', 'border-gray-200');
             selectedButton.classList.add('bg-indigo-600', 'text-white', 'border-transparent');
             selectedButton.blur();
 
@@ -371,3 +371,4 @@
     </script>
 </body>
 </html>
+
